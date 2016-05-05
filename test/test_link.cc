@@ -9,7 +9,7 @@ TEST_CASE("Link", "[dag]") {
     {
         Pin* a = new Pin();
         Pin* b = new Pin();
-        Link* l = new Link(a,b);
+        Link* l = new Link(a,b, 1024 );
     }
 }
 }

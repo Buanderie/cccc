@@ -8,7 +8,7 @@ namespace cccc
     class Link
     {
     public:
-        Link( cccc::Pin* start, cccc::Pin* end );
+        Link( cccc::Pin* start, cccc::Pin* end, size_t capacity );
         virtual ~Link();
 
     private:
@@ -16,6 +16,10 @@ namespace cccc
         cccc::Pin* _end;
 
         cccc::BipBuffer * _buffer;
+        size_t _capacity;
+
+        void init();
+        void destroy();
 
     protected:
 
