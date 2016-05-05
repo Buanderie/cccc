@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pin.h"
+#include "bipbuffer.h"
 
 namespace cccc
 {
@@ -13,6 +14,8 @@ namespace cccc
     private:
         cccc::Pin* _start;
         cccc::Pin* _end;
+
+        cccc::BipBuffer * _buffer;
 
     protected:
 
