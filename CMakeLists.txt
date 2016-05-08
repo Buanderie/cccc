@@ -4,6 +4,7 @@ project(CCCC)
 
 option(BUILD_TEST "Build Unit tests" ON)
 option(BUILD_EXAMPLES "Build Examples" OFF)
+option(WITH_PROF "Enable profiling and coverage report analysis" OFF)
 
 # Handle platform specifics
 if ( "${CMAKE_SYSTEM_NAME}" MATCHES "Windows" )
