@@ -24,7 +24,6 @@ TEST_CASE( "BipBuffer", "[core]" )
     }
 
     // NOT IMPLEMENTED YET
-    /*
     SECTION("resize")
     {
         BipBuffer bb(1024);
@@ -37,8 +36,7 @@ TEST_CASE( "BipBuffer", "[core]" )
         REQUIRE( bb.available() == 1024 );
         delete[] buffer;
     }
-	*/
-	
+
     SECTION("read")
     {
         BipBuffer bb(128);
