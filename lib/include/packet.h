@@ -3,7 +3,9 @@
 #include <cstddef>
 #include <cstring>
 
-#define CCCC_PACKET_HEADER_SIZE 24
+#include <iostream>
+
+using namespace std;
 
 namespace cccc {
 
@@ -11,13 +13,28 @@ namespace cccc {
     {
     public:
         Packet( const void* data=nullptr, size_t payloadSize=0 )
-            :_payloadSize(payloadSize)
+            :_payloadSize(payloadSize), _payload(nullptr)
         {
             init();
             if( data != nullptr && payloadSize > 0 )
             {
-
+                memcpy( _payload, data, payloadSize );
             }
+        }
+
+        Packet( const Packet& other )
+            :_payloadSize(other._payloadSize), _payload(nullptr)
+        {
+            (*this) = other;
+        }
+
+        Packet& operator =( const Packet& other )
+        {
+            destroy();
+            _payloadSize = other._payloadSize;
+            init();
+            memcpy( _payload, other._payload, _payloadSize );
+            return (*this);
         }
 
         virtual ~Packet()
@@ -25,24 +42,23 @@ namespace cccc {
             destroy();
         }
 
-        size_t size(){ return _payloadSize + CCCC_PACKET_HEADER_SIZE; }
-        size_t payloadSize(){ return _payloadSize; }
-        void* data(){ return _packetData; }
+        size_t size(){ return _payloadSize; }
+        void* data(){ return _payload; }
 
     private:
-        void*   _packetData;
+        void*   _payload;
         size_t  _payloadSize;
 
         void init()
         {
-            _packetData = malloc( _payloadSize + CCCC_PACKET_HEADER_SIZE );
+            _payload = malloc( _payloadSize );
         }
 
         void destroy()
         {
-            if( _packetData != nullptr )
+            if( _payload != nullptr )
             {
-                free( _packetData );
+                free( _payload );
             }
         }
 
