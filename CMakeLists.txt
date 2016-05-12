@@ -32,7 +32,7 @@ endif()
 ##
 
 # Library
-add_subdirectory(libcccc)
+add_subdirectory(lib)
 
 if( BUILD_TEST )
 	add_subdirectory(test)

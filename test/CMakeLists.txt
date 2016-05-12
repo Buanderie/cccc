@@ -22,4 +22,3 @@ file ( GLOB_RECURSE TEST_CPP ./*.cc )
 add_executable( cccc_test ${TEST_CPP} )
 
 target_link_libraries( cccc_test ${DEPS} )
-
