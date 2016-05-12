@@ -19,12 +19,12 @@ cccc::Link::~Link()
 
 bool cccc::Link::write(const cccc::Packet &packet)
 {
-    return false;
+    return true;
 }
 
 bool cccc::Link::read(cccc::Packet &packet)
 {
-    return false;
+    return true;
 }
 
 void cccc::Link::init()
