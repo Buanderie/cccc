@@ -13,6 +13,7 @@ TEST_CASE("Packet", "[protocol]") {
         Packet p(buffer, PBS);
         REQUIRE( p.data() != nullptr );
         REQUIRE( p.data() != (void*)(buffer) );
+        REQUIRE( p.size() == PBS )
         delete[] buffer;
     }
 
