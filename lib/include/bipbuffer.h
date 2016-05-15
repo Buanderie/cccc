@@ -35,6 +35,7 @@ namespace cccc
         bool pop( const void* dst );
 
     private:
+        size_t                          _blobsCapacity;
         size_t                          _capacity;
         size_t                          _size;
         size_t                          _beg_index;

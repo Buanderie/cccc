@@ -43,7 +43,7 @@ namespace cccc {
         }
 
         size_t size(){ return _payloadSize; }
-        void* data(){ return _payload; }
+        void* data() const { return _payload; }
 
     private:
         void*   _payload;

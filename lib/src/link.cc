@@ -19,17 +19,24 @@ cccc::Link::~Link()
 
 bool cccc::Link::write(const cccc::Packet &packet)
 {
-    return true;
+    return _buffer->push( packet );
 }
 
 bool cccc::Link::read(cccc::Packet &packet)
 {
-    return true;
+    return _buffer->pop( packet );
+}
+
+size_t cccc::Link::size()
+{
+    return _buffer->size();
 }
 
 void cccc::Link::init()
 {
-    _buffer = new BipBuffer( _capacity );
+    _buffer = new PacketBuffer( _capacity );
+    _start->addOutcomingLink( this );
+    _end->setIncomingLink( this );
 }
 
 void cccc::Link::destroy()

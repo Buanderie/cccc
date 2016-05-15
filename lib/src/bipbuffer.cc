@@ -12,8 +12,11 @@
 
 using namespace std;
 
+#define INITIAL_CAPACITY 1024
+
 cccc::BipBuffer::BipBuffer(size_t capacity, BipBufferStrategy strategy)
-    :_capacity(capacity)
+    :_capacity(INITIAL_CAPACITY)
+    ,_blobsCapacity(capacity)
     ,_size(0)
     ,_beg_index(0)
     ,_end_index(0)
@@ -33,6 +36,36 @@ cccc::BipBuffer::~BipBuffer()
 void cccc::BipBuffer::resize(size_t size)
 {
     // realloc somehow... careful about that
+
+    // Now that's ugly.
+    BipBuffer tmp( 1.5f * size, this->_strategy );
+
+    // Pop every item to a temp resized bipbuffer
+    int nBlobs = _blobs.size();
+    for( size_t k = 0; k < nBlobs; ++k )
+    {
+        int curSize = peekSize();
+        unsigned char * buffer = new unsigned char[ curSize ];
+        pop( buffer );
+        tmp.push( buffer, curSize );
+        delete[] buffer;
+    }
+
+    //
+    _capacity = size;
+    _data = (unsigned char*)realloc( _data, size );
+    _size = 0;
+    _beg_index = 0;
+    _end_index = 0;
+
+    // re-push every piece of shit
+    for( size_t k = 0; k < nBlobs; ++k )
+    {
+        int curSize = tmp.peekSize();
+        unsigned char * buffer = new unsigned char[ curSize ];
+        tmp.pop( buffer );
+        push( buffer, curSize );
+    }
 }
 
 size_t cccc::BipBuffer::size()

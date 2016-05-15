@@ -22,6 +22,10 @@ endif()
 # Set include directories
 include_directories( ${LIBCCCC_SOURCE_DIR}/include )
 
+# Make headers appear in QtCreator
+FILE(GLOB_RECURSE HeaderFiles "include/*.h")
+add_custom_target(headers SOURCES ${HeaderFiles})
+
 file ( GLOB_RECURSE CORE_CPP ./src/*.cc )
 set( LIBCCCC_CPP ${CORE_CPP} )
 if( ${CCCC_CURRENT_SYSTEM} STREQUAL "WINDOWS" )

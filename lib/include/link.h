@@ -1,8 +1,7 @@
 #pragma once
 
 #include "pin.h"
-#include "bipbuffer.h"
-
+#include "packetbuffer.h"
 #include "packet.h"
 
 namespace cccc
@@ -15,12 +14,13 @@ namespace cccc
 
         bool write( const cccc::Packet& packet );
         bool read( cccc::Packet& packet );
+        size_t size();
 
     private:
         cccc::Pin* _start;
         cccc::Pin* _end;
 
-        cccc::BipBuffer * _buffer;
+        cccc::PacketBuffer * _buffer;
         size_t _capacity;
 
         void init();
