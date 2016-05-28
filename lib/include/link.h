@@ -3,10 +3,11 @@
 #include "pin.h"
 #include "packetbuffer.h"
 #include "packet.h"
+#include "identifiable.h"
 
 namespace cccc
 {
-    class Link
+    class Link : public Identifiable
     {
     public:
         Link( cccc::Pin* start, cccc::Pin* end, size_t capacity );

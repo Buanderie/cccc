@@ -2,6 +2,12 @@
 #include "pin.h"
 #include "link.h"
 
+cccc::Pin::Pin()
+    :_incomingLink(nullptr)
+{
+
+}
+
 bool cccc::Pin::write(cccc::Object *object)
 {
     bool ret = true;
@@ -11,6 +17,13 @@ bool cccc::Pin::write(cccc::Object *object)
             ret = false;
     }
     return ret;
+}
+
+bool cccc::Pin::isConnected()
+{
+    bool cond1 = _incomingLink != nullptr;
+    bool cond2 = _outcomingLinks.size() > 0;
+    return cond1 & cond2;
 }
 
 void cccc::Pin::setIncomingLink(cccc::Link *link)
@@ -25,5 +38,12 @@ void cccc::Pin::addOutcomingLink(cccc::Link *link)
 
 bool cccc::Pin::readPacket( cccc::Packet& p )
 {
-    return _incomingLink->read(p);
+    if( _incomingLink != nullptr )
+    {
+        return _incomingLink->read(p);
+    }
+    else
+    {
+        return false;
+    }
 }

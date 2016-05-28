@@ -14,7 +14,7 @@ namespace cccc
         friend class cccc::Link;
 
     public:
-        Pin(){}
+        Pin();
         virtual ~Pin(){}
 
         bool write( Object* object );
@@ -29,6 +29,8 @@ namespace cccc
             }
             return ret;
         }
+
+        bool isConnected();
 
     private:
         Link* _incomingLink;
