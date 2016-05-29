@@ -1,5 +1,8 @@
 #pragma once
 
+
+#include "graph.h"
+
 namespace cccc
 {
     class Backend
@@ -7,6 +10,8 @@ namespace cccc
     public:
         Backend(){}
         virtual ~Backend(){}
+
+        virtual void runOnce( cccc::Graph* g )=0;
 
     private:
 
